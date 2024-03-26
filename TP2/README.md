@@ -1,38 +1,38 @@
-# TP2: Sentiment Analysis with SVM
+# TP2 : Analyse de Sentiments avec SVM
 
 ## Auteur
 DJAGHLOUL AYOUB AHMED AMINE
 
-## Overview
-This project involves the implementation of a Support Vector Machine (SVM) classifier for sentiment analysis on Twitter data. The objective is to classify tweets into positive, negative, or neutral categories based on their content.
+## Présentation du Projet
+Ce projet implique la mise en œuvre d'un classificateur à Machines à Vecteurs de Support (SVM) pour l'analyse de sentiments sur des données Twitter. L'objectif est de classifier les tweets en catégories positives, négatives ou neutres en fonction de leur contenu.
 
-## Environment Setup
-Ensure you have Python 3.6+ installed along with the following packages:
+## Configuration de l'Environnement
+Assurez-vous d'avoir Python 3.6+ installé ainsi que les packages suivants :
 - pandas
 - scikit-learn
-- re (regular expressions)
+- re (expressions régulières)
 
-### Installing Dependencies
-Install the required Python packages using pip:
+### Installation des Dépendances
+Installez les packages Python requis en utilisant pip :
 
 ```bash
 pip install pandas scikit-learn
 ```
 
-## Data Preprocessing
-Data is loaded from text files containing tweets with their sentiment labels. Text preprocessing steps include converting text to lowercase, removing non-word characters, and replacing multiple spaces with a single space.
+## Prétraitement des Données
+Les données sont chargées à partir de fichiers texte contenant les tweets avec leurs étiquettes de sentiment. Les étapes de prétraitement du texte incluent la conversion du texte en minuscules, la suppression des caractères non-mots et le remplacement de plusieurs espaces par un seul espace.
 
-### Load Data
-The datasets used are `twitter-2013train-A.txt`, `twitter-2013dev-A.txt`, and `twitter-2013test-A.txt`, containing training, development, and test data respectively.
+### Chargement des Données
+Les jeux de données utilisés sont `twitter-2013train-A.txt`, `twitter-2013dev-A.txt` et `twitter-2013test-A.txt`, contenant respectivement les données d'entraînement, de développement et de test.
 
-## Feature Extraction
-A unique numerical identifier is assigned to each word in the dataset's lexicon. Tweet texts are then converted into feature vectors based on word occurrences.
+## Extraction des Caractéristiques
+Un identifiant numérique unique est attribué à chaque mot du lexique du jeu de données. Les textes des tweets sont ensuite convertis en vecteurs de caractéristiques basés sur les occurrences des mots.
 
-## SVM Classification
-An SVM model is trained on the processed data. This model is then used to predict the sentiment of tweets in the development and test sets.
+## Classification SVM
+Un modèle SVM est entraîné sur les données traitées. Ce modèle est ensuite utilisé pour prédire le sentiment des tweets dans les ensembles de développement et de test.
 
-### Model Evaluation
-The model's performance is evaluated using precision, recall, and F1-score metrics, with results detailed for each sentiment category.
+### Évaluation du Modèle
+La performance du modèle est évaluée à l'aide des métriques de précision, de rappel et de score F1, avec des résultats détaillés pour chaque catégorie de sentiment.
 
-## Results
-The results section includes classification reports for both the development and test datasets, highlighting the effectiveness of the SVM classifier in sentiment analysis tasks.
+## Résultats
+La section des résultats comprend les rapports de classification pour les ensembles de données de développement et de test, mettant en évidence l'efficacité du classificateur SVM dans les tâches d'analyse de sentiments.
