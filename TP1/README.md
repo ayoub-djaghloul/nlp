@@ -1,43 +1,94 @@
-# TP1 : Word Embeddings avec Word2Vec
+# TP1 : Analyse de Sentiment avec SVM
 
 ## Auteur
 DJAGHLOUL AYOUB AHMED AMINE
 
 ## Présentation du Projet
-Ce TP explore l'utilisation de Word2Vec pour générer des word embeddings, permettant de capturer des relations sémantiques complexes entre les mots. À travers l'entraînement d'un modèle Word2Vec sur le corpus text8, nous démontrons comment ces embeddings peuvent être utilisés pour des tâches telles que la recherche de mots similaires et le calcul de similarités cosinus entre les mots.
+Ce TP se concentre sur l'utilisation d'un modèle SVM (Machine à Vecteurs de Support) pour l'analyse de sentiment sur des données de Twitter. Le but est de classifier les tweets en trois catégories : positifs, négatifs et neutres.
 
 ## Configuration et Exécution
 
 ### Environnement Requis
 - Python 3.6+
-- Bibliothèques : NumPy, Pandas, Keras (pour TensorFlow backend)
+- Bibliothèques : Pandas, Scikit-learn, re (pour les expressions régulières)
 
 ### Installation des Dépendances
 ```bash
-pip install numpy pandas keras tensorflow
+pip install pandas scikit-learn
 ```
 
-### Exécution des Scripts
-Les scripts sont configurés pour utiliser le modèle Word2Vec pré-entraîné. Pour exécuter l'analyse de similarité et trouver des mots proches :
+### Chargement des Données
+Les données sont chargées à partir de fichiers texte pré-définis, séparés en ensembles d'entraînement, de développement et de test.
 
-```bash
-python analyse_similarity.py
+```python
+import pandas as pd
+
+def charge_donnees():
+    ...
 ```
 
-## Fonctionnalités Principales
+### Prétraitement des Textes
+Les tweets sont nettoyés et prétraités pour enlever les caractères spéciaux et les espaces multiples.
 
-### Génération de Word Embeddings
-Utilisation de Word2Vec avec différentes configurations pour générer des embeddings de mots à partir du corpus text8. Les options clés incluent :
-- Méthode d'apprentissage (CBOW ou Skip-gram)
-- Dimension des vecteurs d'embedding
-- Taille de la fenêtre contextuelle
-- Downsampling des mots fréquents
+```python
+import re
 
-### Analyse de Similarité
-Calcul de la similarité cosinus entre les vecteurs de mots pour évaluer leur proximité sémantique. Par exemple, la similarité entre "hello" et "world" a été explorée.
+def preprocess_text(text):
+    ...
+```
 
-### Recherche de Mots Proches
-Identification des mots les plus proches sémantiquement pour un ensemble de mots donnés, illustrant la capacité des embeddings à capturer des relations de sens entre les mots.
+### Extraction des Caractéristiques et Conversion au Format SVM
+La conversion des textes en un format compatible avec le modèle SVM est réalisée par comptage des occurrences des mots et mapping à un espace vectoriel.
+
+```python
+from collections import Counter
+
+def convert_to_svm_format(data, word_counts):
+    ...
+```
+
+### Entraînement et Évaluation du Modèle
+Le modèle SVM est entraîné sur l'ensemble d'entraînement et évalué sur les ensembles de développement et de test pour mesurer sa performance.
+
+```python
+from sklearn.svm import LinearSVC
+from sklearn.metrics import classification_report
+
+clf = LinearSVC(dual=False)
+...
+```
 
 ## Résultats et Discussion
-Les résultats démontrent l'efficacité des embeddings de mots à saisir des similarités et relations sémantiques subtiles. Une discussion approfondie sur les résultats obtenus, y compris les mots proches pour des termes tels que "best", "football", "france", "wine", "apple", "mouse", et "macron", est fournie dans le rapport associé au TP.
+Les résultats obtenus montrent la capacité du modèle SVM à classifier efficacement les sentiments des tweets. Une discussion sur les performances du modèle et les métriques d'évaluation est incluse dans le rapport associé au TP.
+
+### Résultats sur l'Ensemble de Développement
+```plaintext
+Rapport de classification pour l'ensemble de développement:
+              precision    recall  f1-score   support
+
+          -1       0.58      0.41      0.48       340
+           0       0.64      0.69      0.67       739
+           1       0.62      0.66      0.64       575
+
+    accuracy                           0.62      1654
+   macro avg       0.61      0.59      0.59      1654
+weighted avg       0.62      0.62      0.62      1654
+```
+
+### Résultats sur l'Ensemble de Test
+```plaintext
+Rapport de classification pour l'ensemble de test:
+              precision    recall  f1-score   support
+
+          -1       0.57      0.37      0.45       559
+           0       0.61      0.76      0.68      1513
+           1       0.70      0.62      0.66      1475
+
+    accuracy                           0.64      3547
+   macro avg       0.63      0.58      0.60      3547
+weighted avg       0.64      0.64      0.64      3547
+```
+
+---
+
+Ces modifications reflètent le passage d'une approche basée sur les embeddings de mots à une utilisation directe d'un modèle SVM pour la classification de sentiment.
