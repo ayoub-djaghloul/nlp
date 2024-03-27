@@ -1,57 +1,78 @@
 
-# TP3: Word Embeddings with Word2Vec
+# TP3: Understanding and Implementing Word Embeddings with Word2Vec
 
-This project explores word embeddings using the Word2Vec model, demonstrating various aspects of training and utilizing word embeddings in natural language processing (NLP). It focuses on options for the word2vec program, cosine similarity calculation between word vectors, and finding words closest to a given set of words.
+This project is part of the Machine Learning course of the Master's program in Artificial Intelligence, specifically under the Automatic Language Processing class. It aims to understand and implement word embeddings using the Word2Vec toolkit. Word embeddings are a type of word representation that allows words to be represented as vectors in a continuous vector space, capturing semantic and syntactic similarities among words.
+
+## Overview
+
+The main objective of this practical session is to explore the functionality of word embeddings through the Word2Vec toolkit. These embeddings are capable of capturing contextual, semantic, and syntactic nuances of words in real-valued vectors.
 
 ## Getting Started
 
 ### Prerequisites
 
-Before running this project, ensure you have Python installed on your machine along with the necessary libraries, including `gensim` for Word2Vec modeling and `numpy` for handling vector operations.
+- Python programming environment
+- Gensim library for Word2Vec
+- Access to the `text8` corpus
+- Word2Vec and ConvertVec tools
 
-### Installation
+### Setup
 
-Clone this repository to your local machine to get started with the project:
+1. **Data Preparation**: Download the `text8` corpus, a pre-processed subset of Wikipedia text.
 
-```bash
-git clone https://yourproject/repository.git
-cd your-project-directory
+   ```
+   wget http://mattmahoney.net/dc/text8.zip -O text8.gz
+   gzip -d text8.gz -f
+   ```
+
+2. **Word2Vec Installation**: Clone and compile the Word2Vec toolkit.
+
+   ```
+   git clone https://github.com/tmikolov/word2vec
+   cd word2vec
+   make
+   ```
+
+3. **ConvertVec Installation**: Useful for converting binary Word2Vec models to text format.
+
+   ```
+   git clone https://github.com/marekrei/convertvec
+   cd convertvec
+   make
+   ```
+
+## Training Word2Vec Model
+
+Train word embeddings on the `text8` corpus using the following command, which includes various parameters like vector size, window size, and more.
+
+```
+./word2vec -train text8 -output vectors400.bin -cbow 1 -size 400 -window 8 -negative 25 -hs 0 -sample 1e-4 -threads 20 -binary 1 -iter 15
 ```
 
-Install the required Python dependencies:
+## Understanding Word2Vec Options
 
-```bash
-pip install -r requirements.txt
+The command line options for Word2Vec training control various aspects of the training process and model architecture, influencing the quality and characteristics of the resulting word embeddings.
+
+## Exploring Semantic Similarities
+
+One of the fascinating aspects of word embeddings is their ability to place semantically similar words close to each other in the vector space. This project includes examples of finding words closely related to a given set of words, such as "best," "football," "france," and "wine," as well as exploring the vectors for specific words like "hello."
+
+## Analogy Tasks
+
+Word embeddings can also solve word analogy tasks, showcasing the model's ability to capture relationships between words beyond simple similarity.
+
+## Converting Binary Model to Text
+
+To edit and view the vectors, the binary file `vectors400.bin` is converted to text format using ConvertVec.
+
+```
+./convertvec bin2txt vectors400.bin vectors400.txt
 ```
 
-### Usage
+## Observations and Insights
 
-To train the Word2Vec model and explore word embeddings, follow the steps outlined in the `tp3.ipynb` Jupyter notebook. This notebook guides you through:
+The project offers insights into the semantic relationships captured by word vectors, discussing the results of closest word queries and analogy tasks, and highlighting the potential and limitations of the Word2Vec model.
 
-- Training a Word2Vec model with the specified parameters.
-- Exploring the vector representation of words, such as the vector for 'hello'.
-- Calculating the cosine similarity between two words.
-- Finding words closest to a specified set of words, demonstrating semantic relationships captured by embeddings.
+## Contributions and Licensing
 
-#### Command Line Interface (CLI)
-
-Additionally, for direct command-line usage, refer to the example below:
-
-```bash
-python word2vec_options.py --train text8 --output vectors400.bin --size 400 --window 8
-```
-
-Replace `word2vec_options.py` with your script name if different.
-
-## Contributing
-
-We welcome contributions to improve this project. If you have suggestions or bug reports, please open an issue in the repository. For those who wish to contribute directly, please follow the standard fork-and-pull request workflow.
-
-## Acknowledgments
-
-- This project utilizes the `text8` corpus for training the Word2Vec model.
-- Special thanks to the contributors of the `gensim` library for providing the tools necessary for working with word embeddings.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is open for contributions. The `text8` dataset is utilized for training purposes, and the project is intended for educational purposes under the guidance of Mickael Rouvier, as part of the Machine Learning and Automatic Language Processing curriculum.
